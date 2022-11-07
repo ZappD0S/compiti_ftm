@@ -148,7 +148,7 @@
 
     Partiamo calcolando il commutatore
     \begin{equation}\label{double_comm}
-        \left[ \left[ \hat{H},\hat{x}\right], \hat{x}\right].
+        \left[ \left[ \hat{H},\hat{x}\right], \hat{x}\right]
     \end{equation}
     Il commutatore interno  $\left[ \hat{H},\hat{x}\right]$ vale
     \begin{align*}
@@ -266,20 +266,23 @@ Indichiamo i quattro autostati di $\hat{\vec{S}}^{\,2}$ e $\hat{S}_z$ con $\Ket{
 \[
 \Ket{1, -1},\quad \Ket{1, 0},\quad \Ket{1, 1},\quad \Ket{0, 0}
 \]
-Gli autostati che formano la base dello spazio ottenuto dal prodotto tensoriale dei due spazi degli spin singoli sono
+
+% Gli autostati che formano la base dello spazio ottenuto dal prodotto tensoriale dei due spazi
+La base di autostati che si ottengono dal prodotto tensoriale degli autostati di $\hat{\vec{S}}^{\,2}_1$ e $\hat{S}_{1z}$ o $\hat{\vec{S}}_2^{\,2}$ e $\hat{S}_{2z}$ sono
+
 \begin{equation*}
     \Ket{\frac{1}{2}, \frac{1}{2}} \otimes \Ket{\frac{1}{2}, \frac{1}{2}},\quad
     \Ket{\frac{1}{2}, -\frac{1}{2}} \otimes \Ket{\frac{1}{2}, \frac{1}{2}},\quad
     \Ket{\frac{1}{2}, \frac{1}{2}} \otimes \Ket{\frac{1}{2}, -\frac{1}{2}},\quad
     \Ket{\frac{1}{2}, -\frac{1}{2}} \otimes \Ket{\frac{1}{2}, -\frac{1}{2}}
 \end{equation*}
-dove ciascun ket rappresenta uno degli autostati di $\hat{\vec{S}}^{\,2}_1$ e $\hat{S}_{1z}$ o $\hat{\vec{S}}_2^{\,2}$ e $\hat{S}_{2z}$.
+% dove ciascun ket $\Ket{s_i, m_i}$ rappresenta uno degli autostati di $\hat{\vec{S}}^{\,2}_1$ e $\hat{S}_{1z}$ o $\hat{\vec{S}}_2^{\,2}$ e $\hat{S}_{2z}$.
 Siccome questa notazione è scomoda e i due numeri quantici $s_1$ e $s_2$ sono sempre gli stessi, introduciamo la notazione semplificata
 \[
     \Ket{m_1, m_2} \equiv \Ket{s_1, m_1} \otimes \Ket{s_2, m_2}
 \]
 
-Un'altra proprietà utile che mette in relazione in numero quantico $m$ di spin totale con i due numeri $m_1$ e $m_2$ degli spin singoli è
+Un'altra proprietà utile che mette in relazione il numero quantico $m$ di spin totale con i due numeri $m_1$ e $m_2$ degli spin singoli è
 \[
     m = m_1 + m_2
 \]
@@ -329,7 +332,7 @@ e
     &= \frac{2}{\sqrt{2}}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} = \sqrt{2}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}
 \end{align*}
 
-Infine abbiamo scoperto che $\Ket{1, -1}$
+Infine troviamo che
 \[
     \Ket{1, -1} = \Ket{-\frac{1}{2}, -\frac{1}{2}}
 \]
@@ -347,7 +350,6 @@ può valere solo se $\alpha$ e $\delta$ sono $0$. Quindi possiamo assumere che $
 \[
     \Ket{0, 0} = \alpha \Ket{-\frac{1}{2}, \frac{1}{2}} + \beta \Ket{\frac{1}{2}, -\frac{1}{2}}
 \]
-
 
 Siccome i 4 autostati dello spin totale sono autostati di operatori hermitiani, sono certamente ortogonali tra di loro.
 Sfruttando questa proprietà imponiamo
