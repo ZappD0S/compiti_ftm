@@ -1,0 +1,393 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+
+% \usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{braket}
+\usepackage{cancel}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{Problema \arabic{#1}}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problema \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problema \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Compiti \#2}
+\newcommand{\hmwkDueDate}{7 Nov, 2022}
+\newcommand{\hmwkClass}{Fisica Teorica della Materia}
+% \newcommand{\hmwkClassTime}{Section A}
+% \newcommand{\hmwkClassInstructor}{Professor Isaac Newton}
+\newcommand{\hmwkAuthorName}{\textbf{Gianluca Zappavigna}}
+
+%
+% Title Page
+%
+
+% \title{
+%     \vspace{2in}
+%     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+%     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+%     \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+%     \vspace{3in}
+% }
+
+% \author{\hmwkAuthorName}
+% \date{}
+
+\renewcommand{\part}[1]{\textbf{Parte \arabic{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} #2}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+% \maketitle
+% \pagebreak
+
+\begin{homeworkProblem}
+    \part
+
+    Partiamo calcolando il commutatore
+    \begin{equation}\label{double_comm}
+        \left[ \left[ \hat{H},\hat{x}\right], \hat{x}\right].
+    \end{equation}
+    Il commutatore interno  $\left[ \hat{H},\hat{x}\right]$ vale
+    \begin{align*}
+        &\left[ \hat{H},\hat{x}\right] = \left[ \frac{\hat{p}^2}{2m} + V(\hat{x}),\hat{x}\right] =
+        \left[ \frac{\hat{p}^2}{2m},\hat{x}\right] + \left[V(\hat{x}),\hat{x}\right]= \\
+        &= \frac{1}{2m} \left(\hat{p}^2 \hat{x} - \hat{x} \hat{p}^2\right) =
+        \frac{1}{2m} \left(\hat{p} \hat{p} \hat{x} - \hat{x} \hat{p} \hat{p}\right) = \\
+        &= \frac{1}{2m} \left(\hat{p} \hat{p} \hat{x} - \hat{p} \hat{x} \hat{p} + \hat{p} \hat{x} \hat{p}  - \hat{x} \hat{p} \hat{p}\right) = \\
+        &= \frac{1}{2m} \left(\hat{p} \left[\hat{p}, \hat{x}\right] + \left[\hat{p}, \hat{x}\right] \hat{p}\right) = \\
+        &= \frac{1}{2m} \left(\hat{p} \left(-i\hbar\right) + \left(-i\hbar\right) \hat{p}\right) = \\
+        &= -\frac{i \hbar}{m}\hat{p}
+    \end{align*}
+
+    Quindi \eqref{double_comm} diventa
+    \begin{align}
+        \left[ \left[ \hat{H},\hat{x}\right], \hat{x}\right] = \left[-\frac{i \hbar}{m}\hat{p}, \hat{x}\right] = -\frac{i \hbar}{m} \left[\hat{p}, \hat{x}\right] = -\frac{i \hbar}{m} (-i\hbar) = - \frac{\hbar^2}{m} \label{double_comm_id}
+    \end{align}
+
+    In alternativa, possiamo scrivere \eqref{double_comm} esplicitamente e otteniamo
+    \begin{align}
+        \left[ \left[ \hat{H},\hat{x}\right], \hat{x}\right] =         \left[\hat{H}\hat{x} - \hat{x}\hat{H}, \hat{x}\right] =
+        \hat{H}\hat{x}^2 - \hat{x}\hat{H}\hat{x} - \hat{x}\hat{H}\hat{x} + \hat{x}^2\hat{H} = \hat{H}\hat{x}^2 - 2\hat{x}\hat{H}\hat{x} + \hat{x}^2\hat{H} \label{double_comm_expl}
+    \end{align}
+
+    Calcoliamo il valore di aspettazione di \eqref{double_comm} usando un generico autostato $\Ket{a}$ di $\hat{H}$. Esistono due modi per farlo,
+    il primo sfruttando l'identità \eqref{double_comm_id}
+    \begin{align}
+        \Braket{a | \left[\left[ \hat{H},\hat{x}\right], \hat{x}\right] | a} =
+        \Braket{a | -\frac{\hbar^2}{m} | a} = -\frac{\hbar^2}{m} \Braket{a | a} = -\frac{\hbar^2}{m} \label{res1}
+    \end{align}
+    Il secondo invece consiste nell'utilizzare il doppio commutatore scritto esplicitamente come in \eqref{double_comm_expl}
+    \begin{align}
+        &\Braket{a | \left[\left[ \hat{H},\hat{x}\right], \hat{x}\right] | a} =
+        \Braket{a | \hat{H}\hat{x}^2 - 2\hat{x}\hat{H}\hat{x} + \hat{x}^2\hat{H} | a} = \nonumber \\
+        &= \Braket{a | \hat{H}\hat{x}^2 | a} - 2 \Braket{a | \hat{x}\hat{H}\hat{x} | a} + \Braket{a | \hat{x}^2\hat{H} | a} = \nonumber \\
+        &= E_a \Braket{a | \hat{x}^2 | a} - 2 \Braket{a | \hat{x}\hat{H}\hat{x} | a} + E_a \Braket{a | \hat{x}^2 | a} = \nonumber \\
+        &= 2 E_a \Braket{a | \hat{x}^2 | a} - 2 \Braket{a | \hat{x}\hat{H}\hat{x} | a} \label{two_exp_vals}
+    \end{align}
+    Il primo valore di aspettazione in \eqref{two_exp_vals} si può riscrivere come
+    \begin{align*}
+        &\Braket{a | \hat{x}^2 | a} = \sum_b \Braket{a | \hat{x}| b} \Braket{b| \hat{x} | a} =
+        \sum_b \Braket{b | \hat{x}| a}^* \Braket{b| \hat{x} | a} = \\
+        &=\sum_b \left|\Braket{b| \hat{x} | a}\right|^2
+    \end{align*}
+    mentre per il secondo
+    \begin{align*}
+        &\Braket{a | \hat{x}\hat{H}\hat{x} | a} = \sum_b \braket{a | \hat{x} | b} \braket{b | \hat{H}\hat{x} | a} =
+        \sum_b E_b \braket{a | \hat{x} | b} \braket{b | \hat{x} | a} = \\
+        &=\sum_b E_b \braket{b | \hat{x} | a}^* \braket{b | \hat{x} | a} =
+        \sum_b E_b \left|\braket{b | \hat{x} | a}\right|^2
+    \end{align*}
+    Ora possiamo sostituire i due risultati in \eqref{two_exp_vals} e troviamo
+    \begin{align}
+        &2 E_a \sum_b \left|\Braket{b| \hat{x} | a}\right|^2 - 2 \sum_b E_b \left|\braket{b | \hat{x} | a}\right|^2 = \nonumber \\
+        &=2  \sum_b (E_a - E_b) \left|\Braket{b| \hat{x} | a}\right|^2  \label{res2}
+    \end{align}
+    Siccome \eqref{res1} e \eqref{res2} devono essere uguali troviamo
+    \begin{equation*}
+        \sum_b (E_a - E_b) \left|\Braket{b| \hat{x} | a}\right|^2 = -\frac{\hbar^2}{2m}
+    \end{equation*}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    Calcoliamo esplicitamente il commutatore
+    \begin{align*}
+        \left[\hat{\vec{J}}^{\,2}, \hat{A}_i\right] = \left[\hat{J}^2_x + \hat{J}^2_y + \hat{J}^2_z,\hat{A}_i\right] =
+        \hat{J}^2_x\hat{A}_i + \hat{J}^2_y\hat{A}_i + \hat{J}^2_z\hat{A}_i
+        - \hat{A}_i\hat{J}^2_x - \hat{A}_i\hat{J}^2_y - \hat{A}_i\hat{J}^2_z
+    \end{align*}
+    Per scrivere il commutatore in maniera più sintetica possiamo sostituire i pedici $x, y, z$ con gli indici $1, 2, 3$ e trasformarlo
+    in una sommatoria.
+    \begin{align*}
+        &\sum_j \hat{J}^2_j\hat{A}_i - \hat{A}_i\hat{J}^2_j = \\
+        &=\sum_j \hat{J}_j\hat{J}_j\hat{A}_i - \hat{A}_i\hat{J}_j\hat{J}_j = \\
+        &=\sum_j \hat{J}_j\hat{J}_j\hat{A}_i - \hat{J}_j\hat{A}_i\hat{J}_j + \hat{J}_j\hat{A}_i\hat{J}_j - \hat{A}_i\hat{J}_j\hat{J}_j = \\
+        &=\sum_j \hat{J}_j\left[\hat{J}_j, \hat{A}_i\right]  + \left[\hat{J}_j, \hat{A}_i\right]\hat{J}_j
+    \end{align*}
+    Dato che l'operatore $\hat{\vec{A}}$ è un vettore vale
+    \begin{equation*}
+        \left[\hat{J}_i, \hat{A}_j\right] = i \hbar \epsilon_{ijk} \hat{A}_k
+    \end{equation*}
+    Quindi troviamo
+    \begin{align*}
+        &\sum_j \hat{J}_j \left(\sum_k i \hbar \epsilon_{jik}\hat{A}_k\right)  + \left(\sum_k i \hbar \epsilon_{jik}\hat{A}_k \right)\hat{J}_j = \\
+        &=i \hbar \sum_{j, k} \epsilon_{jik} \hat{J}_j \hat{A}_k +i \hbar \sum_{j, k} \epsilon_{jik}\hat{A}_k\hat{J}_j
+    \end{align*}
+    Nella seconda sommatoria possiamo scambiare gli indici $j$ e $k$ e otteniamo
+    \begin{align*}
+        i \hbar \sum_{j, k} \epsilon_{jik} \hat{J}_j \hat{A}_k +i \hbar \sum_{j, k} \epsilon_{jik}\hat{A}_k\hat{J}_j =
+        i \hbar \sum_{j, k} \epsilon_{jik} \hat{J}_j \hat{A}_k +i \hbar \sum_{j, k} \epsilon_{kij}\hat{A}_j\hat{J}_k
+    \end{align*}
+    Ora vogliamo portare gli indici del tensore di Levi-Civita nell'ordine $ijk$. Per farlo dobbiamo effettuare uno scambio nel tensore
+    della prima sommatoria e due in quello della seconda sommatoria. Infatti
+    \begin{align*}
+        &jik \longrightarrow ijk \\
+        &kij \longrightarrow ikj \longrightarrow ijk
+    \end{align*}
+    Per ciascuno scambio di una coppia di indici il tensore di Levi-Civita cambia di segno, quindi
+    \begin{align*}
+        &i \hbar \sum_{j, k} (-1)^1\epsilon_{ijk} \hat{J}_j \hat{A}_k +i \hbar \sum_{j, k} (-1)^2\epsilon_{ijk}\hat{A}_j\hat{J}_k = \\
+        &= i \hbar \sum_{j, k} \epsilon_{ijk}\hat{A}_j\hat{J}_k - i \hbar \sum_{j, k} \epsilon_{ijk} \hat{J}_j \hat{A}_k \\
+        &= i \hbar \left(\hat{\vec{A}} \times \hat{\vec{J}} - \hat{\vec{J}} \times \hat{\vec{A}}\right)_i
+    \end{align*}
+    Tutti questi passaggi sono stati necessari per fare in modo che la sommatoria rispecchiasse la definizione di prodotto vettoriale.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+Sappiamo che nell'addizione dei momenti angolari, per il numero quantico di spin totale $s$ vale che $|s_2 - s_1| \le s \le s_1 + s_2$.
+Nel caso di due particelle aventi entrambe spin $s_1, s_2 = 1/2$ otteniamo che $0 \le s \le 1$.
+Naturalmente il numero quantico magnetico $m$ deve essere sempre compreso tra i valori $-s$ e $s$, cioè $-s \le m \le s$.
+Quindi nel nostro caso, per il numero quantico $s = 1$ avremo tre valori possibili per $m$, ovvero $m \in \{-1, 0, 1\}$, mentre per il numero quantico $s=0$, $m$ può essere solo $0$.
+Indichiamo i quattro autostati di $\hat{\vec{S}}^{\,2}$ e $\hat{S}_z$ con $\Ket{s, m}$, e questi sono $\Ket{1, -1}$, $\Ket{1, 0}$, $\Ket{1, 1}$ e $\Ket{0, 0}$.
+
+Gli autostati che formano la base dello spazio ottenuto dal prodotto tensoriale dei due spazi degli spin singoli sono
+\begin{equation*}
+    \Ket{\frac{1}{2}, \frac{1}{2}} \otimes \Ket{\frac{1}{2}, \frac{1}{2}},\quad
+    \Ket{\frac{1}{2}, -\frac{1}{2}} \otimes \Ket{\frac{1}{2}, \frac{1}{2}},\quad
+    \Ket{\frac{1}{2}, \frac{1}{2}} \otimes \Ket{\frac{1}{2}, -\frac{1}{2}},\quad
+    \Ket{\frac{1}{2}, -\frac{1}{2}} \otimes \Ket{\frac{1}{2}, -\frac{1}{2}}
+\end{equation*}
+dove ciascun ket rappresenta uno degli autostati di $\hat{\vec{S}}^{\,2}_1$ e $\hat{S}_{1z}$ o $\hat{\vec{S}}_2^{\,2}$ e $\hat{S}_{2z}$.
+Siccome questa notazione è scomoda e i due numeri quantici $s_1$ e $s_2$ sono sempre gli stessi, introduciamo la notazione semplificata
+\[
+    \Ket{m_1, m_2} \equiv \Ket{s_1, m_1} \otimes \Ket{s_2, m_2}
+\]
+
+Un'altra proprietà utile è
+\[
+    m = m_1 + m_2
+\]
+Questa proprietà ci serve per dedurre che l'autostato $\Ket{1, 1}$. Infatti quest'ultimo, che ha numero quantico $m = 1$, non può che corrispondere all'autostato $\Ket{\frac{1}{2}, \frac{1}{2}}$ della base originale, poiché è l'unica
+per cui vale $m_1 = m_2 = 1/2$. Quindi sappiamo già in partenza che
+
+\begin{equation}
+    \Ket{1, 1} = \Ket{\frac{1}{2}, \frac{1}{2}} \label{cg1}
+\end{equation}
+
+A questo autostato possiamo applicare l'operatore di scala $\hat{S}_-$ per trovare $\Ket{1, 0}$ e $\Ket{1, -1}$. Per $\hat{S}_-$ vale che
+
+\begin{align*}
+    % \hat{S}_+ \Ket{j, m} = \hbar \sqrt{(j-m)(j+m+1)} \Ket{j, m + 1}
+    \hat{S}_- \Ket{s, m} = \hbar \sqrt{(s+m)(s-m+1)} \Ket{s, m - 1}
+\end{align*}
+
+Quindi troviamo
+\begin{align*}
+    \hat{S}_- \Ket{1, 1} = \hbar \sqrt{(1+1)(1-1+1)} \Ket{1, 0} = \hbar \sqrt{2} \Ket{1, 0}
+\end{align*}
+
+Facciamo lo stesso con l'altro membro di \eqref{cg1}
+\begin{align*}
+    \hat{S}_- \Ket{\frac{1}{2}, \frac{1}{2}} = \left(\hat{S}_{1-} + \hat{S}_{2-}\right) \Ket{\frac{1}{2}, \frac{1}{2}} = \\
+    \hbar \sqrt{\left(\frac{1}{2}+\frac{1}{2}\right)\left(\frac{1}{2}-\frac{1}{2}+1\right)} \Ket{-\frac{1}{2}, \frac{1}{2}} +
+    \hbar \sqrt{\left(\frac{1}{2}+\frac{1}{2}\right)\left(\frac{1}{2}-\frac{1}{2}+1\right)} \Ket{\frac{1}{2}, -\frac{1}{2}} = \\
+    \hbar \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right)
+\end{align*}
+
+Quindi abbiamo scoperto che
+\[
+    \Ket{1, 0} = \frac{1}{\sqrt{2}} \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right)
+\]
+
+Ripetendo lo stesso procedimento con $\Ket{1, 0}$ troviamo
+\begin{align*}
+    \hat{S}_- \Ket{1, 0} = \hbar \sqrt{(1+0)(1-0+1)} \Ket{1, -1} = \hbar \sqrt{2} \Ket{1, -1}
+\end{align*}
+e
+\begin{align*}
+    \left(\hat{S}_{1-} + \hat{S}_{2-}\right) \frac{1}{\sqrt{2}} \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right) = \\
+    \frac{1}{\sqrt{2}}\left(\cancel{\hat{S}_{1-}\Ket{-\frac{1}{2}, \frac{1}{2}}} + \hat{S}_{1-}\Ket{\frac{1}{2}, -\frac{1}{2}}
+    + \hat{S}_{2-}\Ket{-\frac{1}{2}, \frac{1}{2}} + \cancel{\hat{S}_{2-}\Ket{\frac{1}{2}, -\frac{1}{2}}}\right) = \\
+    \frac{1}{\sqrt{2}} \left(\hat{S}_{1-}\Ket{\frac{1}{2}, -\frac{1}{2}} + \hat{S}_{2-}\Ket{-\frac{1}{2}, \frac{1}{2}}\right) = \\
+    \frac{1}{\sqrt{2}} \left(\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} + \hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}\right) = \\
+    \frac{2}{\sqrt{2}}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} = \sqrt{2}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}
+\end{align*}
+
+Infine abbiamo scoperto che $\Ket{1, -1}$
+\[
+    \Ket{1, -1} = \Ket{-\frac{1}{2}, -\frac{1}{2}}
+\]
+In realtà avremmo potuto arrivare a quest'ultimo risultato con lo stesso ragionamento con cui abbiamo dedotto \eqref{cg1}.
+Rimane da determinare $\Ket{0, 0}$.
+Se vogliamo esprimere questo autostato come combinazione lineare della base originale abbiamo quattro coefficienti da determinare
+
+\[
+    \Ket{0, 0} = \alpha \Ket{\frac{1}{2}, \frac{1}{2}} + \beta \Ket{-\frac{1}{2}, \frac{1}{2}} + \gamma \Ket{\frac{1}{2}, -\frac{1}{2}} + \delta \Ket{-\frac{1}{2}, -\frac{1}{2}}
+\]
+
+Tuttavia possiamo dedurre a priori che due di questi coefficienti devono essere 0. Infatti Se applichiamo l'operatore $\hat{S}_z$ ad entrambi i membri, ci accorgiamo che l'uguaglianza
+può valere solo se $\alpha$ e $\delta$ sono $0$. Quindi possiamo assumere che $\Ket{0, 0}$ sia della forma
+
+\[
+    \Ket{0, 0} = \alpha \Ket{-\frac{1}{2}, \frac{1}{2}} + \beta \Ket{\frac{1}{2}, -\frac{1}{2}}
+\]
+
+
+Siccome i 4 autostati dello spin totale sono autostati di operatori hermitiani, sono certamente ortogonali tra di loro.
+Sfruttando questa proprietà imponiamo
+\begin{align}
+    \Braket{1, 1 | 0, 0} = 0 \label{orth1} \\
+    \Braket{1, 0 | 0, 0} = 0 \label{orth2} \\
+    \Braket{1, -1 | 0, 0} = 0 \label{orth3}
+\end{align}
+
+Eseguendo i calcoli ci accorgiamo che \eqref{orth1} e \eqref{orth3} non producono nessuna condizione utile, perché da
+entrambe si ottiene $\alpha \cdot 0 + \beta \cdot 0 = 0$. Da \eqref{orth2} invece otteniamo
+\begin{gather}
+    \begin{split}
+        0 &= \frac{1}{\sqrt{2}} \left(\Bra{-\frac{1}{2}, \frac{1}{2}} + \Bra{\frac{1}{2}, -\frac{1}{2}}\right)\left(\alpha \Ket{-\frac{1}{2}, \frac{1}{2}} + \beta \Ket{\frac{1}{2}, -\frac{1}{2}}\right) = \\
+        &= \frac{1}{\sqrt{2}} \left(\alpha \cdot 1 + \beta \cdot 0 + \alpha \cdot 0 + \beta \cdot 1 \right) = \frac{1}{\sqrt{2}} \left(\alpha + \beta\right)
+    \end{split} \nonumber \\
+    \nonumber \\
+    \Longrightarrow \quad \alpha = -\beta \label{cg_eq1}
+\end{gather}
+
+L'altra condizione che possiamo sfruttare per determinare $\alpha$ e $\beta$ è la condizione di normalizzazione
+\[
+    |\alpha|^2 + |\beta|^2 = 1
+\]
+Siccome possiamo sempre assumere che i coefficienti di Clebsch-Gordan siano reali, l'equazione si riduce a
+\begin{equation}
+    \alpha^2 + \beta^2 = 1 \label{cg_eq2}
+\end{equation}
+Mettendo in sistema le equazioni \eqref{cg_eq1} e \eqref{cg_eq2} le soluzioni possibili sono
+\[
+    \alpha = \pm \frac{1}{\sqrt{2}}, \ \beta = \mp \frac{1}{\sqrt{2}}
+\]
+
+Siccome i fattori di fase non hanno alcuna rilevanza dal punto di vista fisico possiamo scegliere a piacere
+una delle due soluzioni, e otteniamo
+
+\[
+    \Ket{0, 0} = \frac{1}{\sqrt{2}} \left(\Ket{-\frac{1}{2}, \frac{1}{2}} - \Ket{\frac{1}{2}, -\frac{1}{2}}\right)
+\]
+
+
+
+\end{homeworkProblem}
+
+\end{document}

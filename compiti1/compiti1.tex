@@ -1,0 +1,327 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+
+% \usepackage{bbold}
+\usepackage{dsfont}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{Problema \arabic{#1}}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problema \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problema \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Compiti \#1}
+\newcommand{\hmwkDueDate}{12 Ott, 2022}
+\newcommand{\hmwkClass}{Fisica Teorica della Materia}
+% \newcommand{\hmwkClassTime}{Section A}
+% \newcommand{\hmwkClassInstructor}{Professor Isaac Newton}
+\newcommand{\hmwkAuthorName}{\textbf{Gianluca Zappavigna}}
+
+%
+% Title Page
+%
+
+% \title{
+%     \vspace{2in}
+%     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+%     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+%     \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+%     \vspace{3in}
+% }
+
+% \author{\hmwkAuthorName}
+% \date{}
+
+\renewcommand{\part}[1]{\textbf{Parte \arabic{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} #2}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+% \maketitle
+% \pagebreak
+
+\begin{homeworkProblem}
+    \part
+
+    Per dimostrare che $U(t, t') = \exp\left(-\frac{i}{\hbar} H_0(t- t')\right)$ soddisfa l'equazione di Schr{\"o}dinger data un'Hamiltoniana $H(t) = H_0$ indipendente dal tempo, iniziamo sostituendo $H(t)$ e $U(t, t')$ nell'equazione.
+
+    \begin{equation}\label{shrod_eq}
+        \begin{split}
+            i \hbar \pderiv{t}{U(t, t')} = H_0 U(t, t')
+            \\
+            i \hbar \pderiv{t}{\exp\left(- \frac{i}{\hbar} H_0(t - t')\right)} = H_0 U(t, t')
+        \end{split}
+    \end{equation}
+
+    Calcoliamo la derivata parziale rispetto al tempo dell'esponenziale di matrice usando la sua definizione, cioè
+    \begin{equation}\label{matrix_exp}
+        \exp(A) = \sum_{n = 0}^{\infty} \frac{1}{n!} A^n = \mathds{1} + \sum_{n = 1}^{\infty} \frac{1}{n!} A^n
+    \end{equation}
+
+    Considerando solo la derivata parziale e applicando \eqref{matrix_exp} si ottiene
+
+    \[
+        \begin{split}
+            & \pderiv{t}{\left[\mathds{1} + \sum_{n = 1}^{\infty} \frac{1}{n!} \left(-\frac{i}{\hbar} H_0 (t - t')\right)^n \right]} =
+            \\
+            &= \sum_{n = 1}^{\infty} \frac{1}{n!} \left(-\frac{i}{\hbar} H_0\right)^n \pderiv{t}{(t - t')^n}
+            \\
+            &= \sum_{n = 1}^{\infty} \frac{1}{n!} \left(-\frac{i}{\hbar} H_0\right)^n n(t - t')^{n-1}
+            \\
+            &= -\frac{i}{\hbar} H_0 \sum_{n = 1}^{\infty} \frac{1}{(n-1)!} \left(-\frac{i}{\hbar} H_0\right)^{n-1} (t - t')^{n-1}
+            \\
+            &= -\frac{i}{\hbar} H_0 \sum_{n = 0}^{\infty} \frac{1}{n!} \left(-\frac{i}{\hbar} H_0\right)^n (t - t')^n
+            \\
+            &= -\frac{i}{\hbar} H_0 \exp\left(- \frac{i}{\hbar} H_0(t - t')\right) = -\frac{i}{\hbar} H_0 U(t, t')
+        \end{split}
+    \]
+
+    Sostituendo questo risultato in \eqref{shrod_eq} troviamo
+    \[
+        \begin{split}
+        i \hbar (-\frac{i}{\hbar} H_0) U(t, t') &= H_0 U(t, t')
+        \\
+        H_0 U(t, t') &= H_0 U(t, t')
+        \end{split}
+    \]
+    e quindi abbiamo dimostrato che l'eq. di Schr{\"o}dinger \`e soddisfatta.
+    \\
+
+    \part
+
+    Possiamo sfruttare l'identità $\exp(A)\exp(B) = \exp(A + B)$, che vale però solo quando $A$ e $B$ commutano. Nel nostro caso questa condizione è soddisfatta.
+    \[
+        \begin{split}
+            & U(t, t')U(t', t'') =
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0(t - t')\right) \exp\left(- \frac{i}{\hbar} H_0(t' - t'')\right)
+            \\
+            &= \exp\left(-\frac{i}{\hbar} H_0(t - t') -\frac{i}{\hbar} H_0(t' - t'')\right)
+            \\
+            &= \exp\left(-\frac{i}{\hbar} H_0 [(t - t') + (t' - t'')]\right)
+            \\
+            &= \exp\left(-\frac{i}{\hbar} H_0 (t - t'')\right) = U(t, t'')
+        \end{split}
+    \]
+
+    \part
+    % Questa identità non richiede particolari calcoli.
+
+    \[
+        \begin{split}
+            & U(t, t) =
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0(t - t)\right)
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0 \cdot 0\right) = \mathds{1}
+        \end{split}
+    \]
+
+    \part
+
+    Per quest'ultima identità possiamo sfruttare la seguente proprietà dell'esponenziale di matrice: \linebreak $(\exp{A})^\dagger = \exp\left(A^\dagger\right)$.
+    Inoltre sfruttiamo il fatto che l'operatore Hamiltoniano $H_0$ è necessariamente hermitiano, quindi vale $H_0^{\dagger} = H_0$.
+    \[
+        \begin{split}
+            & U(t, t')U(t, t')^\dagger =
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0(t - t')\right) \exp\left(- \frac{i}{\hbar} H_0(t - t')\right)^\dagger
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0(t - t')\right) \exp\left(\left(- \frac{i}{\hbar} H_0(t - t')\right)^\dagger\right)
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0(t - t')\right) \exp\left(\frac{i}{\hbar} H_0^\dagger(t - t')\right)
+            \\
+            &= \exp\left(- \frac{i}{\hbar} H_0(t - t')\right) \exp\left(\frac{i}{\hbar} H_0(t - t')\right)
+            \\
+            &= \exp\left(\mathbf{0}\right) = \mathds{1}
+        \end{split}
+    \]
+\end{homeworkProblem}
+
+% \pagebreak
+
+\begin{homeworkProblem}
+\[
+    \exp\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma}\right) = \mathds{1} \cos(\phi / 2) - i \vec{n} \cdot \vec{\sigma} \sin(\phi / 2)
+\]
+Per dimostrare questa identità è utile la seguente proprietà delle matrici di Pauli
+\begin{equation}\label{pauli_square}
+    \left(\vec{n} \cdot \vec{\sigma}\right)^2 = \mathds{1}
+\end{equation}
+
+\`E evidente che se vale \eqref{pauli_square} valgono anche le seguenti due proprietà:
+\[
+    \begin{aligned}
+        \left(\vec{n} \cdot \vec{\sigma}\right)^{2n} &= \mathds{1} \\
+        \left(\vec{n} \cdot \vec{\sigma}\right)^{2n + 1} &= \vec{n} \cdot \vec{\sigma}
+    \end{aligned}
+    \quad \forall n \in \mathbb{N}
+\]
+
+Dimostro \eqref{pauli_square} prima scrivendo in maniera esplicita il prodotto $\vec{n} \cdot \vec{\sigma}$. Chiamo $n_x$, $n_y$ e $n_z$ le componenti di $\vec{n}$, quindi
+$\vec{n} = (n_x, n_y, n_z)$.
+\[
+    n_x
+    \left(\begin{matrix}
+        0 & 1 \\
+        1 & 0
+    \end{matrix}\right)
+    + n_y
+    \left(\begin{matrix}
+        0 & -i \\
+        i & 0
+    \end{matrix}\right)
+    +n_z
+    \left(\begin{matrix}
+        1 & 0 \\
+        0 & -1
+    \end{matrix}\right)
+    = \left(\begin{matrix}
+        n_z & nx - i n_y \\
+        n_x + i n_y & -n_z
+    \end{matrix}\right)
+    \]
+Elevando al quadrato si ottiene
+\[
+    \left(\begin{matrix}
+        n_z & nx - i n_y \\
+        n_x + i n_y & -n_z
+    \end{matrix}\right) ^ 2
+    = \left(\begin{matrix}
+        n_x^2 + n_y^2 + n_z^2 & 0 \\
+        0 & n_x^2 + n_y^2 + n_z^2
+    \end{matrix}\right)
+\]
+Siccome $\vec{n}$ è unitario per ipotesi, significa che $n_x^2 + n_y^2 + n_z^2 = 1$. Quindi l'ultima matrice è $\mathds{1}$.
+Se ora applichiamo \eqref{matrix_exp} a $\exp\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma}\right)$ troviamo
+
+\[
+    \sum_{n = 0}^{\infty} \frac{1}{n!}\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma} \right)^n
+\]
+Possiamo separare la sommatoria in due sommatorie dove la prima contiene solo potenze pari mentre la seconda solo quelle dispari
+\[
+    \sum_{n = 0}^{\infty} \frac{1}{(2n)!}\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma} \right)^{2n} +
+    \sum_{n = 0}^{\infty} \frac{1}{(2n + 1)!}\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma} \right)^{2n + 1}
+\]
+Con alcuni passaggi algebrici si ottiene
+\[
+    \begin{split}
+    &\sum_{n = 0}^{\infty} \frac{1}{(2n)!}\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma} \right)^{2n} +
+    \sum_{n = 0}^{\infty} \frac{1}{(2n + 1)!}\left(-\frac{i}{2} \phi \vec{n} \cdot \vec{\sigma} \right)^{2n + 1} =
+    \\
+    &= \sum_{n = 0}^{\infty} \frac{1}{(2n)!}\left(-\frac{i}{2} \phi\right)^{2n} (\vec{n} \cdot \vec{\sigma})^{2n} +
+    \sum_{n = 0}^{\infty} \frac{1}{(2n + 1)!}\left(-\frac{i}{2} \phi\right)^{2n + 1} (\vec{n} \cdot \vec{\sigma})^{2n + 1}
+    \\
+    &= \sum_{n = 0}^{\infty} \frac{1}{(2n)!}\left(\frac{\phi}{2} \right)^{2n} \mathds{1} +
+    \sum_{n = 0}^{\infty} \frac{-i}{(2n + 1)!}\left(\frac{\phi}{2} \right)^{2n + 1} \vec{n} \cdot \vec{\sigma}
+    \\
+    &= \mathds{1} \sum_{n = 0}^{\infty} \frac{1}{(2n)!}\left(\frac{\phi}{2} \right)^{2n} -
+    i \vec{n} \cdot \vec{\sigma} \sum_{n = 0}^{\infty} \frac{1}{(2n + 1)!}\left(\frac{\phi}{2} \right)^{2n + 1}
+    \end{split}
+\]
+Le due sommatorie rimaste sono le serie di Taylor di $\cos(\phi / 2)$ e $\sin(\phi / 2)$ rispettivamente, quindi l'identità è dimostrata.
+
+\end{homeworkProblem}
+
+\end{document}
