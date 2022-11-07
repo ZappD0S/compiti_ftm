@@ -262,8 +262,10 @@ Sappiamo che nell'addizione dei momenti angolari, per il numero quantico di spin
 Nel caso di due particelle aventi entrambe spin $s_1, s_2 = 1/2$ otteniamo che $0 \le s \le 1$.
 Naturalmente il numero quantico magnetico $m$ deve essere sempre compreso tra i valori $-s$ e $s$, cioè $-s \le m \le s$.
 Quindi nel nostro caso, per il numero quantico $s = 1$ avremo tre valori possibili per $m$, ovvero $m \in \{-1, 0, 1\}$, mentre per il numero quantico $s=0$, $m$ può essere solo $0$.
-Indichiamo i quattro autostati di $\hat{\vec{S}}^{\,2}$ e $\hat{S}_z$ con $\Ket{s, m}$, e questi sono $\Ket{1, -1}$, $\Ket{1, 0}$, $\Ket{1, 1}$ e $\Ket{0, 0}$.
-
+Indichiamo i quattro autostati di $\hat{\vec{S}}^{\,2}$ e $\hat{S}_z$ con $\Ket{s, m}$, e questi sono
+\[
+\Ket{1, -1},\quad \Ket{1, 0},\quad \Ket{1, 1},\quad \Ket{0, 0}
+\]
 Gli autostati che formano la base dello spazio ottenuto dal prodotto tensoriale dei due spazi degli spin singoli sono
 \begin{equation*}
     \Ket{\frac{1}{2}, \frac{1}{2}} \otimes \Ket{\frac{1}{2}, \frac{1}{2}},\quad
@@ -277,7 +279,7 @@ Siccome questa notazione è scomoda e i due numeri quantici $s_1$ e $s_2$ sono s
     \Ket{m_1, m_2} \equiv \Ket{s_1, m_1} \otimes \Ket{s_2, m_2}
 \]
 
-Un'altra proprietà utile è
+Un'altra proprietà utile che mette in relazione in numero quantico $m$ di spin totale con i due numeri $m_1$ e $m_2$ degli spin singoli è
 \[
     m = m_1 + m_2
 \]
@@ -302,10 +304,10 @@ Quindi troviamo
 
 Facciamo lo stesso con l'altro membro di \eqref{cg1}
 \begin{align*}
-    \hat{S}_- \Ket{\frac{1}{2}, \frac{1}{2}} = \left(\hat{S}_{1-} + \hat{S}_{2-}\right) \Ket{\frac{1}{2}, \frac{1}{2}} = \\
-    \hbar \sqrt{\left(\frac{1}{2}+\frac{1}{2}\right)\left(\frac{1}{2}-\frac{1}{2}+1\right)} \Ket{-\frac{1}{2}, \frac{1}{2}} +
+    &\hat{S}_- \Ket{\frac{1}{2}, \frac{1}{2}} = \left(\hat{S}_{1-} + \hat{S}_{2-}\right) \Ket{\frac{1}{2}, \frac{1}{2}} = \\
+    &= \hbar \sqrt{\left(\frac{1}{2}+\frac{1}{2}\right)\left(\frac{1}{2}-\frac{1}{2}+1\right)} \Ket{-\frac{1}{2}, \frac{1}{2}} +
     \hbar \sqrt{\left(\frac{1}{2}+\frac{1}{2}\right)\left(\frac{1}{2}-\frac{1}{2}+1\right)} \Ket{\frac{1}{2}, -\frac{1}{2}} = \\
-    \hbar \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right)
+    &= \hbar \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right)
 \end{align*}
 
 Quindi abbiamo scoperto che
@@ -319,12 +321,12 @@ Ripetendo lo stesso procedimento con $\Ket{1, 0}$ troviamo
 \end{align*}
 e
 \begin{align*}
-    \left(\hat{S}_{1-} + \hat{S}_{2-}\right) \frac{1}{\sqrt{2}} \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right) = \\
-    \frac{1}{\sqrt{2}}\left(\cancel{\hat{S}_{1-}\Ket{-\frac{1}{2}, \frac{1}{2}}} + \hat{S}_{1-}\Ket{\frac{1}{2}, -\frac{1}{2}}
+    &\left(\hat{S}_{1-} + \hat{S}_{2-}\right) \frac{1}{\sqrt{2}} \left(\Ket{-\frac{1}{2}, \frac{1}{2}} + \Ket{\frac{1}{2}, -\frac{1}{2}}\right) = \\
+    &= \frac{1}{\sqrt{2}}\left(\cancel{\hat{S}_{1-}\Ket{-\frac{1}{2}, \frac{1}{2}}} + \hat{S}_{1-}\Ket{\frac{1}{2}, -\frac{1}{2}}
     + \hat{S}_{2-}\Ket{-\frac{1}{2}, \frac{1}{2}} + \cancel{\hat{S}_{2-}\Ket{\frac{1}{2}, -\frac{1}{2}}}\right) = \\
-    \frac{1}{\sqrt{2}} \left(\hat{S}_{1-}\Ket{\frac{1}{2}, -\frac{1}{2}} + \hat{S}_{2-}\Ket{-\frac{1}{2}, \frac{1}{2}}\right) = \\
-    \frac{1}{\sqrt{2}} \left(\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} + \hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}\right) = \\
-    \frac{2}{\sqrt{2}}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} = \sqrt{2}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}
+    &= \frac{1}{\sqrt{2}} \left(\hat{S}_{1-}\Ket{\frac{1}{2}, -\frac{1}{2}} + \hat{S}_{2-}\Ket{-\frac{1}{2}, \frac{1}{2}}\right) = \\
+    &= \frac{1}{\sqrt{2}} \left(\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} + \hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}\right) = \\
+    &= \frac{2}{\sqrt{2}}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}} = \sqrt{2}\hbar\Ket{-\frac{1}{2}, -\frac{1}{2}}
 \end{align*}
 
 Infine abbiamo scoperto che $\Ket{1, -1}$
@@ -339,7 +341,7 @@ Se vogliamo esprimere questo autostato come combinazione lineare della base orig
     \Ket{0, 0} = \alpha \Ket{\frac{1}{2}, \frac{1}{2}} + \beta \Ket{-\frac{1}{2}, \frac{1}{2}} + \gamma \Ket{\frac{1}{2}, -\frac{1}{2}} + \delta \Ket{-\frac{1}{2}, -\frac{1}{2}}
 \]
 
-Tuttavia possiamo dedurre a priori che due di questi coefficienti devono essere 0. Infatti Se applichiamo l'operatore $\hat{S}_z$ ad entrambi i membri, ci accorgiamo che l'uguaglianza
+Tuttavia possiamo dedurre a priori che due di questi coefficienti devono essere 0. Infatti se applichiamo l'operatore $\hat{S}_z$ ad entrambi i membri, ci accorgiamo che l'uguaglianza
 può valere solo se $\alpha$ e $\delta$ sono $0$. Quindi possiamo assumere che $\Ket{0, 0}$ sia della forma
 
 \[
@@ -379,7 +381,7 @@ Mettendo in sistema le equazioni \eqref{cg_eq1} e \eqref{cg_eq2} le soluzioni po
     \alpha = \pm \frac{1}{\sqrt{2}}, \ \beta = \mp \frac{1}{\sqrt{2}}
 \]
 
-Siccome i fattori di fase non hanno alcuna rilevanza dal punto di vista fisico possiamo scegliere a piacere
+Siccome i fattori di fase non hanno alcuna rilevanza dal punto di vista fisico (e quindi anche un semplice $-1$) possiamo scegliere a piacere
 una delle due soluzioni, e otteniamo
 
 \[
