@@ -1,0 +1,526 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+
+% \usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{braket}
+\usepackage{cancel}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{Problema \arabic{#1}}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problema \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problema \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Compiti \#4}
+\newcommand{\hmwkDueDate}{21 Nov, 2022}
+\newcommand{\hmwkClass}{Fisica Teorica della Materia}
+% \newcommand{\hmwkClassTime}{Section A}
+% \newcommand{\hmwkClassInstructor}{Professor Isaac Newton}
+\newcommand{\hmwkAuthorName}{\textbf{Gianluca Zappavigna}}
+
+%
+% Title Page
+%
+
+% \title{
+%     \vspace{2in}
+%     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+%     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+%     \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+%     \vspace{3in}
+% }
+
+% \author{\hmwkAuthorName}
+% \date{}
+
+\renewcommand{\part}[1]{\textbf{Parte \arabic{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} #2}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}}
+
+\begin{document}
+% \maketitle
+% \pagebreak
+
+\begin{homeworkProblem}
+    \part
+
+    \begin{equation*}
+        \left[\hat{n}(\vec{r}, t), \hat{n}(\pvec{r}', t)\right] = 0
+    \end{equation*}
+
+    \begin{align*}
+        &\left(\sum_\sigma \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right)
+        \left(\sum_{\sigma'} \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t)\right)
+        - \left(\sum_{\sigma'} \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t)\right)
+        \left(\sum_\sigma \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right) =
+        \\
+        &= \sum_{\sigma, \sigma'} \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t)
+        - \sum_{\sigma, \sigma'} \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t) =
+        \\
+        &= \sum_{\sigma, \sigma'} \left(\hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t)\right.\\
+        &\phantom{= \sum_{\sigma, \sigma'}\left(\right.} -\hat{\psi}_\sigma^\dagger(\vec{r}, t) \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma}(\vec{r}, t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \\
+        &\phantom{= \sum_{\sigma, \sigma'}\left(\right.} +\hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma}(\vec{r}, t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \\
+        &\phantom{= \sum_{\sigma, \sigma'}\left(\right.}\left. -\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right)
+        \\
+        % &\phantom{= \sum_{\sigma, \sigma'}}\left. -\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right) = \\
+        % &\phantom{= \sum_{\sigma, \sigma'}}\left. -\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right) = \\
+    \end{align*}
+
+    \begin{align*}
+        \left[\hat{\psi}_\sigma(\vec{r}, t), \hat{\psi}_{\sigma'}(\pvec{r}', t)\right] = 0
+        &&
+        \left[\hat{\psi}_\sigma^\dagger(\vec{r}, t), \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\right] = 0
+    \end{align*}
+
+    \begin{align*}
+        &\sum_{\sigma, \sigma'} \left(\hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t)\right.\\
+        &\phantom{= \sum_{\sigma, \sigma'}} -\hat{\psi}_\sigma^\dagger(\vec{r}, t) \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma}(\vec{r}, t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \\
+        &\phantom{= \sum_{\sigma, \sigma'}} +\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_{\sigma'}(\pvec{r}', t)\hat{\psi}_{\sigma}(\vec{r}, t) \\
+        &\phantom{= \sum_{\sigma, \sigma'}}\left. -\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right)
+        \\
+        &= \sum_{\sigma, \sigma'} \hat{\psi}_\sigma^\dagger(\vec{r}, t)\left[\hat{\psi}_\sigma(\vec{r}, t), \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\right]\hat{\psi}_{\sigma'}(\pvec{r}', t)
+        + \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\left[\hat{\psi}_\sigma^\dagger(\vec{r}, t), \hat{\psi}_{\sigma'}(\pvec{r}', t)\right]\hat{\psi}_\sigma(\vec{r}, t)
+        \\
+        &= \sum_{\sigma, \sigma'} \hat{\psi}_\sigma^\dagger(\vec{r}, t)\left[\hat{\psi}_\sigma(\vec{r}, t), \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\right]\hat{\psi}_{\sigma'}(\pvec{r}', t)
+        - \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\left[\hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right]\hat{\psi}_\sigma(\vec{r}, t)
+        \\
+        &= \sum_{\sigma, \sigma'} \delta_{\sigma \sigma'}\hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_{\sigma'}(\pvec{r}', t)
+        - \delta_{\sigma \sigma'}\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_\sigma(\vec{r}, t) =
+        \\
+        &= \sum_\sigma \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t) = 0
+    \end{align*}
+
+    \begin{align*}
+        \left[\hat{\psi}_\sigma(\vec{r}, t), \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\right] =
+        \left[\hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \delta_{\sigma \sigma'}
+    \end{align*}
+
+    \part
+
+    \begin{equation*}
+        \hat{H} = \hat{T} + \hat{V}
+    \end{equation*}
+
+    \begin{equation*}
+        \hat{T} = \sum_\sigma \int_\Omega d^3r \hat{\psi}_\sigma^\dagger(\vec{r})\left(-\frac{\hbar^2}{2m} \nabla^2\right) \hat{\psi}_\sigma(\vec{r})
+    \end{equation*}
+
+    \begin{equation*}
+        \hat{V} = \frac{1}{2} \sum_{\sigma, \sigma'} \int_\Omega d^3r d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_\sigma^\dagger(\vec{r})\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma'}(\pvec{r}')\hat{\psi}_\sigma(\vec{r})
+    \end{equation*}
+
+    \begin{align*}
+        & \left[\hat{T}, \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \\
+        &= \int_\Omega d^3r \hat{\psi}_\sigma^\dagger(\vec{r})\left(-\frac{\hbar^2}{2m} \nabla^2\right) \hat{\psi}_\sigma(\vec{r}) = \\
+        &= \int_\Omega d^3r \hat{\psi}_\sigma^\dagger(\vec{r})\left(-\frac{\hbar^2}{2m} \nabla \cdot \nabla\right) \hat{\psi}_\sigma(\vec{r})
+    \end{align*}
+
+    \begin{equation*}
+        \int_\Omega u \nabla \cdot \vec{v} = \int_\Gamma u \vec{v} \cdot \hat{n} - \int_\Omega \nabla u \cdot \vec{v}
+    \end{equation*}
+
+    \begin{align*}
+        \int_\Omega d^3r \hat{\psi}_\sigma^\dagger(\vec{r})\left(-\frac{\hbar^2}{2m} \nabla \cdot \nabla\right) \hat{\psi}_\sigma(\vec{r}) =\\
+        \cancel{-\frac{\hbar^2}{2m} \int_\Gamma \hat{\psi}_\sigma^\dagger(\vec{r}) \nabla \hat{\psi}_\sigma(\vec{r})}
+        + \frac{\hbar^2}{2m} \int_\Omega d^3r \nabla \hat{\psi}_\sigma^\dagger(\vec{r}) \cdot \nabla \hat{\psi}_\sigma(\vec{r})
+    \end{align*}
+
+
+    \begin{align*}
+        \left[\sum_{\sigma'} \frac{\hbar^2}{2m} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \\
+        \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \left[\nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \\
+    \end{align*}
+
+    % \begin{equation*}
+    %     [AB, C] = A[B, C] + [A, C]B
+    % \end{equation*}
+
+    \begin{align*}
+        &\frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \left[\nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \\
+        &= \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)\hat{\psi}_\sigma^\dagger(\vec{r}, t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t)\nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+        \\
+        &= \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)\hat{\psi}_\sigma^\dagger(\vec{r}, t)
+        - \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)
+        \\
+        &\phantom{\frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r'}+ \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t)\nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+        \\
+        &= \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla\left( \hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t) \hat{\psi}_{\sigma'}(\pvec{r}', t)\right)
+        \\
+        &\phantom{\frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r'} + \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t)\nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+        \\
+        &= \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla\left[ \hat{\psi}_{\sigma'}(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right]
+        \\
+        &\phantom{\frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r'} + \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\hat{\psi}_\sigma^\dagger(\vec{r}, t) \cdot  \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)
+        - \nabla \left(\hat{\psi}_\sigma^\dagger(\vec{r}, t) \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t)\right) \cdot \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+        \\
+        &= \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla\left[ \hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right]
+        + \nabla \left[ \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \cdot  \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+    \end{align*}
+
+    \begin{equation*}
+        \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+        \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t) \cdot  \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t) =
+        \nabla \left(\hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right) \cdot  \nabla \hat{\psi}_{\sigma'}(\pvec{r}', t)
+    \end{equation*}
+
+    \begin{align*}
+        \left[ \hat{\psi}_{\sigma'}(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \delta_{\sigma \sigma'}\delta(\pvec{r}' - \vec{r})
+        &&
+        \left[ \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = 0
+    \end{align*}
+
+    Uso ancora integrazione per parti (ma al contrario) e trascuro integrale di superficie
+
+    \begin{align*}
+        \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \cdot \nabla \delta_{\sigma \sigma'}\delta(\pvec{r}' - \vec{r}) = \\
+        = \frac{\hbar^2}{2m} \sum_{\sigma'} \int_\Omega d^3r' \nabla \cdot \nabla \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \delta_{\sigma \sigma'}\delta(\pvec{r}' - \vec{r}) = \\
+        = \frac{\hbar^2}{2m} \sum_{\sigma'} \delta_{\sigma \sigma'} \int_\Omega d^3r' \nabla^2 \hat{\psi}_{\sigma'}^\dagger(\pvec{r}', t) \delta(\pvec{r}' - \vec{r}) = \\
+        = \frac{\hbar^2}{2m} \sum_{\sigma'} \delta_{\sigma \sigma'} \nabla^2 \hat{\psi}_{\sigma'}^\dagger(\vec{r}, t) = \\
+        = \frac{\hbar^2}{2m} \nabla^2 \hat{\psi}_\sigma^\dagger(\vec{r}, t)
+    \end{align*}
+
+
+    \begin{align*}
+        \left[\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')\hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] = \\
+        \frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' \left[v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')\hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right]
+    \end{align*}
+
+    \begin{equation*}
+        \left[AB, C\right] = A \left[B, C\right] + \left[A, C\right] B
+    \end{equation*}
+
+    \begin{align*}
+        &\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')\left[\hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \\
+        &\phantom{\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega} + \left[v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}''), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}') =
+        \\
+        &= \frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')\left[\hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \\
+        &\phantom{\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega} + \left[v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\vec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}''), \hat{\psi}_{\sigma'}^\dagger(\vec{r}, t)\right] \hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}') = \\
+        \\
+        &= \frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')\left[\hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \\
+        &\phantom{\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega} + v(\pvec{r}' - \pvec{r}'') \left[\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}''), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}')
+    \end{align*}
+Applicando nuovamente la formula (...) si nota che dal secondo commutatore si ottengono due commutatori che danno entrambi 0.
+Applichiamo (...) anche al primo, trovando
+\begin{align*}
+    &\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')\left[\hat{\psi}_{\sigma''}(\pvec{r}'')\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right]
+    \\
+    &= \frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'') \left(
+        \hat{\psi}_{\sigma''}(\pvec{r}'') \left[\hat{\psi}_{\sigma'}(\pvec{r}'), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right]
+        + \left[\hat{\psi}_{\sigma''}(\pvec{r}''), \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right] \hat{\psi}_{\sigma'}(\pvec{r}')
+    \right)
+    \\
+    &= \frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'') \left(
+        \hat{\psi}_{\sigma''}(\pvec{r}'') \delta_{\sigma' \sigma}\delta(\pvec{r}' - \vec{r})
+        + \delta_{\sigma'' \sigma}\delta(\pvec{r}'' - \vec{r}) \hat{\psi}_{\sigma'}(\pvec{r}')
+    \right) =
+    \\
+    &= \frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')
+        \hat{\psi}_{\sigma''}(\pvec{r}'') \delta_{\sigma' \sigma}\delta(\pvec{r}' - \vec{r}) \\
+    &\phantom{=}+\frac{1}{2} \sum_{\sigma', \sigma''} \int_\Omega d^3r' d^3r'' v(\pvec{r}' - \pvec{r}'') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'') \delta_{\sigma'' \sigma}\delta(\pvec{r}'' - \vec{r}) \hat{\psi}_{\sigma'}(\pvec{r}') =
+    \\
+    &= \frac{1}{2} \sum_{\sigma''} \int_\Omega d^3r'' v(\vec{r} - \pvec{r}'') \hat{\psi}_{\sigma}^\dagger(\vec{r})\hat{\psi}_{\sigma''}^\dagger(\pvec{r}'')
+        \hat{\psi}_{\sigma''}(\pvec{r}'')
+    +\frac{1}{2} \sum_{\sigma'} \int_\Omega d^3r' v(\pvec{r}' - \vec{r}) \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma}^\dagger(\vec{r}) \hat{\psi}_{\sigma'}(\pvec{r}') = \\
+    \\
+    &= \frac{1}{2} \sum_{\sigma'} \int_\Omega d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_{\sigma}^\dagger(\vec{r})\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')
+        \hat{\psi}_{\sigma'}(\pvec{r}')
+    +\frac{1}{2} \sum_{\sigma'} \int_\Omega d^3r' v(\pvec{r}' - \vec{r}) \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma}^\dagger(\vec{r}) \hat{\psi}_{\sigma'}(\pvec{r}') = \\
+\end{align*}
+
+    Sfruttiamo $\left[\hat{\psi}_{\sigma}^\dagger(\vec{r}), \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\right] = 0$ e $v(\vec{r} - \pvec{r}') = v(\pvec{r}' - \vec{r})$
+
+    \begin{align*}
+        \left[\hat{V},\hat{\psi}_\sigma^\dagger(\vec{r}, t) \right] = \sum_{\sigma'} \int_\Omega d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_{\sigma}^\dagger(\vec{r})\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')
+        \hat{\psi}_{\sigma'}(\pvec{r}')
+    \end{align*}
+
+    \begin{equation*}
+        \partial_t \hat{\psi}_\sigma(\vec{r}, t) = \left(\partial_t \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right)^\dagger =
+        -\frac{i}{\hbar}\left[\hat{H}, \hat{\psi}_\sigma^\dagger(\vec{r}, t) \right]^\dagger
+    \end{equation*}
+
+    \begin{align*}
+        -\frac{i}{\hbar}\left[\hat{T}, \hat{\psi}_\sigma^\dagger(\vec{r}, t) \right]^\dagger = -\frac{i}{\hbar}\left(\frac{\hbar^2}{2m} \nabla^2 \hat{\psi}_\sigma(\vec{r}, t)\right) =
+        -\frac{i\hbar}{2m} \nabla^2 \hat{\psi}_\sigma(\vec{r}, t)
+    \end{align*}
+
+    \begin{align*}
+        -\frac{i}{\hbar}\left[\hat{V}, \hat{\psi}_\sigma^\dagger(\vec{r}, t) \right]^\dagger =
+        \\
+        -\frac{i}{\hbar} \sum_{\sigma'} \int_\Omega d^3r' v(\vec{r} - \pvec{r}') \left(\hat{\psi}_{\sigma}^\dagger(\vec{r})\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')
+        \hat{\psi}_{\sigma'}(\pvec{r}')\right)^\dagger =
+        \\
+        -\frac{i}{\hbar} \sum_{\sigma'} \int_\Omega d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}') \hat{\psi}_{\sigma'}(\pvec{r}')
+        \hat{\psi}_{\sigma}(\vec{r}) =
+        \\
+    \end{align*}
+
+    \begin{align*}
+        \partial_t \hat{n} = \hat{\psi}_\sigma^\dagger(\vec{r}, t) \partial_t \hat{\psi}_\sigma(\vec{r}, t) + \partial_t \hat{\psi}_\sigma^\dagger(\vec{r}, t) \hat{\psi}_\sigma(\vec{r}, t) =
+        \\
+        \hat{\psi}_\sigma^\dagger(\vec{r}, t) \left(-\frac{i\hbar}{2m} \nabla^2 \hat{\psi}_\sigma(\vec{r}, t)\right) +
+        \left(\frac{i\hbar}{2m} \nabla^2 \hat{\psi}_\sigma^\dagger(\vec{r}, t)\right) \hat{\psi}_\sigma(\vec{r}, t)
+        \\
+        -\frac{i}{\hbar} \sum_{\sigma'} \int_\Omega d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_\sigma^\dagger(\vec{r}, t) \hat{\psi}_{\sigma'}^\dagger(\pvec{r}') \hat{\psi}_{\sigma'}(\pvec{r}')
+        \hat{\psi}_{\sigma}(\vec{r})
+        \\
+        +\frac{i}{\hbar} \sum_{\sigma'} \int_\Omega d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_{\sigma}^\dagger(\vec{r})\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')
+        \hat{\psi}_{\sigma'}(\pvec{r}') \hat{\psi}_\sigma(\vec{r}, t) =
+        \\
+        = \frac{i\hbar}{2m} \left[\nabla^2 \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla^2 \hat{\psi}_\sigma(\vec{r}, t) \right] =
+        \\
+        = \frac{i\hbar}{2m} \left[\nabla^2 \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla^2 \hat{\psi}_\sigma(\vec{r}, t)
+        + \nabla \hat{\psi}_\sigma^\dagger(\vec{r}, t) \cdot \nabla \hat{\psi}_\sigma(\vec{r}, t)
+        - \nabla \hat{\psi}_\sigma^\dagger(\vec{r}, t) \cdot \nabla \hat{\psi}_\sigma(\vec{r}, t)
+        \right] =
+        \\
+        = \frac{i\hbar}{2m} \nabla \cdot \left(\nabla \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)
+        - \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla\hat{\psi}_\sigma(\vec{r}, t) \right)
+        \\
+        = -\frac{i\hbar}{2im} \nabla \cdot \left(\hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla\hat{\psi}_\sigma(\vec{r}, t)
+         - \nabla \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t)\right)
+    \end{align*}
+
+    Definendo
+    \begin{equation*}
+        \hat{j} \equiv \frac{\hbar}{2im} \left( \hat{\psi}_\sigma^\dagger(\vec{r}, t) \nabla\hat{\psi}_\sigma(\vec{r}, t)
+        - \nabla \hat{\psi}_\sigma^\dagger(\vec{r}, t)\hat{\psi}_\sigma(\vec{r}, t) \right)
+    \end{equation*}
+
+    Troviamo
+        \begin{equation*}
+            \partial_t \hat{n} = - \nabla \cdot \hat{j}
+        \end{equation*}
+    \part
+
+    Per $\vec{k} = \pvec{k}'$
+    \begin{align*}
+        \int_\Omega d^3r \exp\left(i 0 \cdot \vec{r}\right) = \int_\Omega d^3r = \Omega
+    \end{align*}
+
+    Per $\vec{k} \neq \pvec{k}'$
+
+    \begin{align*}
+        &\int_\Omega d^3r \exp\left(i(\vec{k} - \pvec{k}') \cdot \vec{r}\right) \\
+        &= \int_{-L/2}^{L/2}\int_{-L/2}^{L/2}\int_{-L/2}^{L/2} dx dy dz \exp \left(i (k_x - k'_x)x + i (k_y - k'_y)y + i (k_z - k'_z)z \right)\\
+        &= \left(\int_{-L/2}^{L/2}dx \exp \left(i (k_x - k'_x)x \right)\right)^3
+    \end{align*}
+
+    \begin{align*}
+        &\int_{-L/2}^{L/2}dx \exp \left(i (k_x - k'_x)x \right) = \left[\frac{\exp(i(k_x - k'_x)x)}{i(k_x - k'_x)}\right]_{-L/2}^{L/2} = \\
+        &= \frac{\exp(i(k_x - k'_x)\frac{L}{2)} - \exp(-i(k_x - k'_x)\frac{L}{2})}{i(k_x - k'_x)}
+    \end{align*}
+
+    $k_x - k'_x = \frac{2 \pi}{L} (n_x - n'_x) = \frac{2 \pi}{L} \Delta n, \ \Delta n \in \mathbb{Z} - \left\{0\right\}$
+
+    \begin{align*}
+        &\frac{\exp(i\frac{2 \pi}{L} \Delta n \frac{L}{2}) - \exp(-i\frac{2 \pi}{L} \Delta n \frac{L}{2})}{i\frac{2 \pi}{L} \Delta n} = \\
+        &= \frac{L}{\pi \Delta n}\frac{\exp(i\pi\Delta n) - \exp(-i\pi\Delta n)}{2i} = \\
+        &= L\frac{\sin(\pi \Delta n)}{\pi \Delta n} = 0
+    \end{align*}
+
+    \part
+
+    \begin{align*}
+        &\sum_\sigma \int_\Omega d^3r \hat{\psi}_\sigma^\dagger(\vec{r})\hat{\psi}_\sigma(\vec{r}) = \\
+        &= \frac{1}{\Omega}\sum_\sigma \int_\Omega d^3r \left(\sum_{\pvec{k}'}\exp\left(-i \pvec{k}'\cdot\vec{r}\right)\hat{c}_{\pvec{k}', \sigma}^\dagger\right)\left(\sum_{\vec{k}}\exp\left(i \vec{k}\cdot\vec{r}\right)\hat{c}_{\vec{k}, \sigma}\right) = \\
+        &= \frac{1}{\Omega}\sum_\sigma \int_\Omega d^3r \sum_{\vec{k}, \pvec{k}'}\exp\left(i \left(\vec{k} - \pvec{k}'\right)\cdot\vec{r}\right)\hat{c}_{\pvec{k}', \sigma}^\dagger\hat{c}_{\vec{k}, \sigma} = \\
+        &= \frac{1}{\Omega}\sum_\sigma \sum_{\vec{k}, \pvec{k}'}\hat{c}_{\pvec{k}', \sigma}^\dagger\hat{c}_{\vec{k}, \sigma} \int_\Omega d^3r \exp\left(i \left(\vec{k} - \pvec{k}'\right)\cdot\vec{r}\right) = \\
+        &= \frac{1}{\Omega}\sum_\sigma \sum_{\vec{k}, \pvec{k}'}\hat{c}_{\pvec{k}', \sigma}^\dagger\hat{c}_{\vec{k}, \sigma} \Omega \delta_{\vec{k}, \pvec{k}'} = \sum_{\vec{k}, \sigma} \hat{c}_{\vec{k}, \sigma}^\dagger\hat{c}_{\vec{k}, \sigma}\\
+    \end{align*}
+
+    \part
+
+    \begin{align*}
+        \hat{c}_{\vec{k}, \sigma} = \frac{1}{\sqrt{\Omega}} \int_\Omega d^3r \exp(-i \vec{k}\cdot\vec{r}) \hat{\psi}_\sigma(\vec{r})
+        &&
+        \hat{c}_{\vec{k}, \sigma}^\dagger = \frac{1}{\sqrt{\Omega}} \int_\Omega d^3r \exp(i \vec{k}\cdot\vec{r}) \hat{\psi}_\sigma^\dagger(\vec{r})
+    \end{align*}
+
+    \begin{align*}
+        &\left[\hat{c}_{\vec{k}, \sigma}, \hat{c}_{\pvec{k}, \sigma'}^\dagger\right] = \\
+        &= \frac{1}{\Omega}\left[\int_\Omega d^3r \exp(-i \vec{k}\cdot\vec{r}) \hat{\psi}_\sigma(\vec{r}),
+                    \int_\Omega d^3r' \exp(i \pvec{k}'\cdot\pvec{r}') \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\right] =
+        \\
+        &= \frac{1}{\Omega}\int_\Omega d^3r d^3r' \exp\left(i \pvec{k}'\cdot\pvec{r}' - i\vec{k}\cdot\vec{r}\right)\left[\hat{\psi}_\sigma(\vec{r}),
+        \hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\right] =
+        \\
+        &= \frac{1}{\Omega}\int_\Omega d^3r d^3r' \exp\left(i \pvec{k}'\cdot\pvec{r}' - i\vec{k}\cdot\vec{r}\right)\delta_{\sigma \sigma'}\delta(\vec{r} - \pvec{r}') = \\
+        &= \frac{\delta_{\sigma \sigma'}}{\Omega}\int_\Omega d^3r d^3r' \exp\left(i \pvec{k}'\cdot\pvec{r} - i\vec{k}\cdot\vec{r}\right) = \frac{\delta_{\sigma \sigma'}}{\Omega} \Omega \delta_{\vec{k}, \pvec{k}'} =
+        \delta_{\sigma \sigma'} \delta_{\vec{k}, \pvec{k}'}
+    \end{align*}
+
+    \part
+
+    \begin{align*}
+        &\Braket{SF | SF} = \Braket{ 0 | \left(\prod_{\vec{k} \leq k_F} \hat{c}_{\vec{k}, \uparrow}^\dagger \hat{c}_{\vec{k}, \downarrow}^\dagger \right)^\dagger \prod_{\vec{k} \leq k_F} \hat{c}_{\vec{k}, \uparrow}^\dagger \hat{c}_{\vec{k}, \downarrow}^\dagger | 0} = \\
+        &= \Braket{ 0 | \prod_{\vec{k} \leq k_F} \hat{c}_{\vec{k}, \downarrow} \hat{c}_{\vec{k}, \uparrow} \hat{c}_{\vec{k}, \uparrow}^\dagger \hat{c}_{\vec{k}, \downarrow}^\dagger | 0} = \\
+    \end{align*}
+
+    Possiamo usare la formula (...), e siccome $\vec{k} = \pvec{k}'$ e $\sigma = \sigma'$ troviamo
+    \begin{equation*}
+        \hat{c}_{\vec{k}, \uparrow} \hat{c}_{\vec{k}, \uparrow}^\dagger = 1 + \hat{c}_{\vec{k}, \uparrow}^\dagger \hat{c}_{\vec{k}, \uparrow}
+    \end{equation*}
+    Quindi
+    \begin{align*}
+        &\Braket{ 0 | \prod_{\vec{k} \leq k_F} \hat{c}_{\vec{k}, \downarrow} \hat{c}_{\vec{k}, \downarrow}^\dagger + \hat{c}_{\vec{k}, \downarrow} \hat{c}_{\vec{k}, \uparrow}^\dagger \hat{c}_{\vec{k}, \uparrow} \hat{c}_{\vec{k}, \downarrow}^\dagger | 0}
+    \end{align*}
+
+    Dato che  nel secondo termine $\hat{c}_{\vec{k}, \uparrow}$ viene applicato a $\Ket{0}$ prima di $\hat{c}_{\vec{k}, \uparrow}^\dagger$, significa che stiamo cercando di distruggere una particella con vettore d'onda $\vec{k}$ e spin $\uparrow$ prima che questo venga creato,
+    quindi questo termina darà un contributo nullo.
+
+    \begin{align*}
+        &\Braket{ 0 | \prod_{\vec{k} \leq k_F} \hat{c}_{\vec{k}, \downarrow} \hat{c}_{\vec{k}, \downarrow}^\dagger | 0} = \\
+        &= \Braket{ 0 | \prod_{\vec{k} \leq k_F} 1 + \hat{c}_{\vec{k}, \downarrow}^\dagger \hat{c}_{\vec{k}, \downarrow} | 0}
+    \end{align*}
+    Qui possiamo riutilizzare lo stesso argomento precedente e troviamo
+    \begin{align*}
+        \Braket{ 0 | \prod_{\vec{k} \leq k_F} 1 | 0} = \Braket{0 | 0} = 1
+    \end{align*}
+
+    \part
+
+    \begin{align*}
+        \hat{T} = \sum_\sigma \int_\Omega d^3r \hat{\psi}_\sigma^\dagger(\vec{r})\left(-\frac{\hbar^2}{2m} \nabla^2\right) \hat{\psi}_\sigma(\vec{r}) =
+        \\
+        = \sum_\sigma \int_\Omega d^3r \left(\sum_{\pvec{k}'}\exp\left(-i \pvec{k}'\cdot\vec{r}\right)\hat{c}_{\pvec{k}', \sigma}^\dagger\right) \left(-\frac{\hbar^2}{2m} \nabla^2\right) \left(\sum_{\vec{k}}\exp\left(i \vec{k}\cdot\vec{r}\right)\hat{c}_{\vec{k}, \sigma}\right) =
+        \\
+        = -\frac{\hbar^2}{2m} \sum_\sigma \sum_{\vec{k}, \pvec{k}'} \hat{c}_{\pvec{k}', \sigma}^\dagger \hat{c}_{\vec{k}, \sigma} \int_\Omega d^3r \exp\left(-i \pvec{k}'\cdot\vec{r}\right)  \nabla^2 \exp\left(i \vec{k}\cdot\vec{r}\right) =
+        \\
+        = -\frac{\hbar^2}{2m} \sum_\sigma \sum_{\vec{k}, \pvec{k}'} \hat{c}_{\pvec{k}', \sigma}^\dagger \hat{c}_{\vec{k}, \sigma} \int_\Omega d^3r \exp\left(-i \pvec{k}'\cdot\vec{r}\right)  \nabla^2 \exp\left(i \vec{k}\cdot\vec{r}\right)
+    \end{align*}
+
+    \begin{equation*}
+        \nabla^2 \exp\left(i \vec{k}\cdot\vec{r}\right)  =
+        \left((i k_x)^2 \exp\left(i \vec{k}\cdot\vec{r}\right),\,
+        (i k_y)^2 \exp\left(i \vec{k}\cdot\vec{r}\right),\,
+        (i k_y)^2 \exp\left(i \vec{k}\cdot\vec{r}\right)
+        \right) = -\pvec{k}^2 \exp\left(i \vec{k}\cdot\vec{r}\right)
+    \end{equation*}
+
+    \begin{align*}
+        \frac{\hbar^2}{2m} \sum_\sigma \sum_{\vec{k}, \pvec{k}'} \pvec{k}^2 \hat{c}_{\pvec{k}', \sigma}^\dagger  \hat{c}_{\vec{k}, \sigma} \int_\Omega d^3r \exp\left(-i \pvec{k}'\cdot\vec{r}\right) \exp\left(i \vec{k}\cdot\vec{r}\right) \\
+        = \frac{\hbar^2}{2m} \sum_\sigma \sum_{\vec{k}, \pvec{k}'} \pvec{k}^2 \hat{c}_{\pvec{k}', \sigma}^\dagger  \hat{c}_{\vec{k}, \sigma} \delta_{\vec{k}, \pvec{k}'}
+        = \frac{\hbar^2}{2m} \sum_\sigma \sum_{\vec{k}} \pvec{k}^2 \hat{c}_{\vec{k}, \sigma}^\dagger  \hat{c}_{\vec{k}, \sigma}
+    \end{align*}
+
+    \begin{align*}
+        \hat{V} = \frac{1}{2} \sum_{\sigma, \sigma'} \int_\Omega d^3r d^3r' v(\vec{r} - \pvec{r}') \hat{\psi}_\sigma^\dagger(\vec{r})\hat{\psi}_{\sigma'}^\dagger(\pvec{r}')\hat{\psi}_{\sigma'}(\pvec{r}')\hat{\psi}_\sigma(\vec{r}) = \\
+        =
+    \end{align*}
+
+\end{homeworkProblem}
+\end{document}
