@@ -1,0 +1,362 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+
+% \usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{braket}
+\usepackage{cancel}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problema \arabic{#1}}{Problema \arabic{#1}}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problema \arabic{#1}}{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problema \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problema \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Compiti \#4}
+\newcommand{\hmwkDueDate}{28 Nov, 2022}
+\newcommand{\hmwkClass}{Fisica Teorica della Materia}
+% \newcommand{\hmwkClassTime}{Section A}
+% \newcommand{\hmwkClassInstructor}{Professor Isaac Newton}
+\newcommand{\hmwkAuthorName}{\textbf{Gianluca Zappavigna}}
+
+%
+% Title Page
+%
+
+% \title{
+%     \vspace{2in}
+%     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+%     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+%     \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+%     \vspace{3in}
+% }
+
+% \author{\hmwkAuthorName}
+% \date{}
+
+\renewcommand{\part}[1]{\textbf{Parte \arabic{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} #2}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}}
+
+\begin{document}
+% \maketitle
+% \pagebreak
+
+\begin{homeworkProblem}
+    \part
+
+    Le funzioni d'onda $\psi_S(\vec{r}_1, \vec{r}_2)$ e $\psi_T(\vec{r}_1, \vec{r}_2)$ sono reali.
+
+    \begin{align*}
+        \psi_S(\vec{r}_1, \vec{r}_2) = C_S (\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)) \\
+        \psi_T(\vec{r}_1, \vec{r}_2) = C_T (\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) - \psi_b(\vec{r}_1)\psi_a(\vec{r}_2))
+    \end{align*}
+
+    \begin{align*}
+        \Braket{\psi_S | \psi_S} = 1 && \Braket{\psi_T | \psi_T} = 1
+    \end{align*}
+
+    \begin{align*}
+        \int d^3 r_1 d^3 r_2 \psi_S^*(\vec{r}_1, \vec{r}_2) \psi_S(\vec{r}_1, \vec{r}_2) =
+        \\
+        \int d^3 r_1 d^3 r_2 \psi_S(\vec{r}_1, \vec{r}_2) \psi_S(\vec{r}_1, \vec{r}_2) =
+        \\
+        C_S^2 \int d^3 r_1 d^3 r_2 \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right)
+            \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right) =
+        \\
+        = C_S^2 \left(\int d^3 r_1 d^3 r_2 \psi_a^2(\vec{r}_1)\psi_b^2(\vec{r}_2)
+        + \int d^3 r_1 d^3 r_2 \psi_b^2(\vec{r}_1)\psi_a^2(\vec{r}_2)
+        + 2\int d^3 r_1 d^3 r_2 \psi_a(\vec{r}_1)\psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\psi_b(\vec{r}_2) \right)
+    \end{align*}
+
+    Le funzioni (...) sono già normalizzate, quindi i primi due integrali danno 1.
+
+    \begin{align*}
+        C_S^2 \left(2 + 2\int d^3 r_1  \psi_a(\vec{r}_1)\psi_b(\vec{r}_1) \int d^3 r_2 \psi_a(\vec{r}_2)\psi_b(\vec{r}_2) \right) =
+        C_S^2 \left(2 + 2S^2 \right)
+    \end{align*}
+
+    Dove abbiamo definito
+    \begin{equation*}
+        S \equiv \int d^3 r \psi_a(\vec{r})\psi_b(\vec{r})
+    \end{equation*}
+
+    Per $\psi_T$ i calcoli sono quasi identici, l'unica differenza è che il terzo integrale ha il meno, quindi si trova
+    \begin{equation*}
+        \int d^3 r_1 d^3 r_2 \psi_T(\vec{r}_1, \vec{r}_2) \psi_T(\vec{r}_1, \vec{r}_2) =
+        C_T^2(2 - 2S^2)
+    \end{equation*}
+
+
+    \begin{align*}
+        C_S = \frac{1}{\sqrt{2(1 + S^2)}} && C_T = \frac{1}{\sqrt{2(1 - S^2)}}
+    \end{align*}
+
+    \part
+
+    \begin{align*}
+        S = \int d^3 r \psi_a(\vec{r})\psi_b(\vec{r}) =
+        \int d^3 r \left(\frac{1}{\sqrt{\pi a^3}} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right| }{a}\right)\right) \left(\frac{1}{\sqrt{\pi a^3}} \exp \left(- \frac{\left|\vec{r} - \vec{r}_b\right| }{a}\right)\right) =
+        \\
+        = \frac{1}{\pi a^3} \int d^3 r  \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right| + \left|\vec{r} - \vec{r}_b\right|}{a}\right)
+    \end{align*}
+
+    \begin{equation*}
+        \begin{cases}
+            \xi = \frac{\left|\vec{r} - \vec{r}_a\right| + \left|\vec{r} - \vec{r}_b\right|}{R} \\
+            \eta = \frac{\left|\vec{r} - \vec{r}_a\right| - \left|\vec{r} - \vec{r}_b\right|}{R} \\
+            \phi = \mathrm{prova}
+        \end{cases}
+    \end{equation*}
+    dove $R \equiv \left|\vec{r}_a - \vec{r}_b\right|$
+
+    Lo Jacobiano di questa trasformazione è $\frac{R^3}{8}(\xi^2 - \eta^2)$
+
+    \begin{align*}
+        \frac{1}{\pi a^3} \int d^3 r  \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right| + \left|\vec{r} - \vec{r}_b\right|}{a}\right)
+        = \frac{1}{\pi a^3} \int d^3 r  \exp \left(- \frac{R}{a} \frac{\left|\vec{r} - \vec{r}_a\right| + \left|\vec{r} - \vec{r}_b\right|}{R}\right) =
+        \\
+        = \frac{1}{\pi a^3} \int_0^{2\pi} d\phi \int_{-1}^1 d\eta \int_1^\infty d\xi \exp \left(- \frac{R}{a} \xi \right) \frac{R^3}{8}(\xi^2 - \eta^2) =
+        \\
+        = \frac{R^3}{8 \pi a^3} \left(\int_0^{2\pi} d\phi \int_{-1}^1 d\eta \int_1^\infty d\xi \exp \left(- \frac{R}{a} \xi \right) \xi^2
+        - \int_0^{2\pi} d\phi \int_{-1}^1 d\eta\, \eta^2 \int_1^\infty d\xi \exp \left(- \frac{R}{a} \xi \right) \right) = \\
+        \\
+        = \frac{R^3}{8 \pi a^3} \left(2 \pi \cdot 2 \cdot \int_1^\infty d\xi \exp \left(- \frac{R}{a} \xi \right) \xi^2
+        - 2 \pi \cdot \left[\frac{\eta^3}{3}\right]_{-1}^1 \left[\frac{\exp \left(- \frac{R}{a} \xi \right)}{- \frac{R}{a}} \right]_1^\infty\right) =
+        \\
+        = \frac{R^3}{8 \pi a^3} \left(4 \pi \int_1^\infty d\xi \exp \left(- \frac{R}{a} \xi \right) \xi^2
+        - 2 \pi \cdot \frac{2}{3} \cdot \frac{\exp \left(- \frac{R}{a} \right)}{\frac{R}{a}}\right) =
+        \\
+        = \frac{R^3}{8 \pi a^3} \left(4 \pi \cdot \frac{2! \exp\left(-\frac{R}{a}\right)}{\left(\frac{R}{a}\right)^3} \sum_{k=0}^2 \frac{\left(\frac{R}{a}\right)^k}{k!}
+        - \frac{4 \pi}{3} \cdot \frac{\exp \left(- \frac{R}{a} \right)}{\frac{R}{a}}\right) =
+        \\
+        = \frac{R^3 \exp\left(-\frac{R}{a}\right)}{2 a^3} \left( \frac{2}{\left(\frac{R}{a}\right)^3} \sum_{k=0}^2 \frac{\left(\frac{R}{a}\right)^k}{k!}
+        - \frac{1}{3} \frac{1}{\frac{R}{a}}\right) =
+        \\
+        = \exp\left(-\frac{R}{a}\right) \left( \sum_{k=0}^2 \frac{\left(\frac{R}{a}\right)^k}{k!}
+        - \frac{1}{6}\left(\frac{R}{a}\right)^2 \right) =
+        \\
+        = \exp\left(-\frac{R}{a}\right) \left( 1 + \frac{1}{2} \left(\frac{R}{a}\right) + \frac{1}{6} \left(\frac{R}{a}\right)^2
+        - \frac{1}{6}\left(\frac{R}{a}\right)^2 \right) =
+        \\
+        = \exp\left(-\frac{R}{a}\right) \left( 1 + \frac{1}{2} \left(\frac{R}{a}\right) \right)
+    \end{align*}
+
+    \part
+
+    \begin{equation*}
+        \frac{\partial}{\partial r_i} \left|\vec{r} - \vec{r}_a\right| = \frac{r_i - r_{a_i}}{\left|\vec{r} - \vec{r}_a\right|}
+        = \frac{\left(\vec{r} - \vec{r}_a\right)_i}{\left|\vec{r} - \vec{r}_a\right|}
+    \end{equation*}
+
+    \begin{equation*}
+        \nabla\left|\vec{r} - \vec{r}_a\right| = \frac{\vec{r} - \vec{r}_a}{\left|\vec{r} - \vec{r}_a\right|}
+    \end{equation*}
+
+
+    \begin{align*}
+        \nabla \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) = \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \nabla \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) = \\
+        = -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \frac{\vec{r} - \vec{r}_a}{\left|\vec{r} - \vec{r}_a\right|}
+    \end{align*}
+
+
+    \begin{align*}
+        \frac{\partial}{\partial r_i} \left(-\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|}\right) =
+        \\
+        = -\frac{1}{a} \left[\frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|} \frac{\partial}{\partial r_i} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) +
+        \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \frac{\partial}{\partial r_i} \frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|}
+        \right]
+        \\
+        = -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \left[\frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|} \frac{\partial}{\partial r_i} \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right)
+        + \frac{\partial}{\partial r_i} \frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|}
+        \right]
+        \\
+        = -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \left[ -\frac{1}{a} \frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|} \frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|}
+        + \frac{1 \cdot \left|\vec{r} - \vec{r}_a\right| - (\vec{r} - \vec{r}_a)_i \cdot \frac{(\vec{r} - \vec{r}_a)_i}{\left|\vec{r} - \vec{r}_a\right|} }{\left|\vec{r} - \vec{r}_a\right|^2}
+        \right]
+        \\
+        = -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \left[ -\frac{1}{a} \frac{(\vec{r} - \vec{r}_a)^2_i}{\left|\vec{r} - \vec{r}_a\right|^2}
+        + \frac{1}{\left|\vec{r} - \vec{r}_a\right|} -\frac{(\vec{r} - \vec{r}_a)^2_i}{\left|\vec{r} - \vec{r}_a\right|^3}
+        \right]
+    \end{align*}
+
+
+    \begin{align*}
+        -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \sum_i \left[ -\frac{1}{a} \frac{(\vec{r} - \vec{r}_a)^2_i}{\left|\vec{r} - \vec{r}_a\right|^2}
+        + \frac{1}{\left|\vec{r} - \vec{r}_a\right|} -\frac{(\vec{r} - \vec{r}_a)^2_i}{\left|\vec{r} - \vec{r}_a\right|^3}
+        \right] =
+        \\
+        = -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \left[ -\frac{1}{a} \frac{\left|\vec{r} - \vec{r}_a\right|^2}{\left|\vec{r} - \vec{r}_a\right|^2}
+        + \frac{3}{\left|\vec{r} - \vec{r}_a\right|} -\frac{\left|\vec{r} - \vec{r}_a\right|^2}{\left|\vec{r} - \vec{r}_a\right|^3}
+        \right] =
+        \\
+        = -\frac{1}{a} \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \left( -\frac{1}{a} + \frac{2}{\left|\vec{r} - \vec{r}_a\right|} \right) =
+        \\
+        = \exp \left(- \frac{\left|\vec{r} - \vec{r}_a\right|}{a}\right) \left(\frac{1}{a^2} - \frac{2}{a \left|\vec{r} - \vec{r}_a\right|} \right)
+    \end{align*}
+
+    \begin{equation*}
+        V(\vec{r}_1, \vec{r}_2) \equiv e^2 \left(
+            \frac{1}{\left|\vec{r}_1 - \vec{r}_2\right|}
+            - \frac{1}{\left|\vec{r}_1 - \vec{r}_a\right|}
+            - \frac{1}{\left|\vec{r}_1 - \vec{r}_b\right|}
+            - \frac{1}{\left|\vec{r}_2 - \vec{r}_a\right|}
+            - \frac{1}{\left|\vec{r}_2 - \vec{r}_b\right|}
+            + \frac{1}{\left|\vec{r}_a - \vec{r}_b\right|}
+        \right)
+    \end{equation*}
+
+    \begin{align*}
+        \int d^3 r_1 d^3 r_2 \psi_S(\vec{r}_1, \vec{r}_2) \left(-\frac{\hbar^2}{2m}(\nabla^2_1 + \nabla^2_2) + V(\vec{r}_1, \vec{r}_2)\right) \psi_S(\vec{r}_1, \vec{r}_2) =
+        \\
+        \int d^3 r_1 d^3 r_2 \psi_S(\vec{r}_1, \vec{r}_2) \left(-\frac{\hbar^2}{2m}(\nabla^2_1 + \nabla^2_2)\right) \psi_S(\vec{r}_1, \vec{r}_2) +
+        \int d^3 r_1 d^3 r_2 V(\vec{r}_1, \vec{r}_2) \psi_S(\vec{r}_1, \vec{r}_2) \psi_S(\vec{r}_1, \vec{r}_2)
+    \end{align*}
+
+    \begin{align*}
+        C_S^2 \int d^3 r_1 d^3 r_2 \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right) \left(-\frac{\hbar^2}{2m}(\nabla^2_1 + \nabla^2_2) + V\right) \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right) =
+        \\
+        = \int d^3 r_1 d^3 r_2 \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right) \times
+        \\
+        \times \left(-\frac{\hbar^2}{2m}(\psi_b(\vec{r}_2) \nabla^2_1 \psi_a(\vec{r}_1) + \psi_a(\vec{r}_2) \nabla^2_1 \psi_b(\vec{r}_1)
+         +\psi_b(\vec{r}_1) \nabla^2_2 \psi_a(\vec{r}_2) + \psi_a(\vec{r}_1) \nabla^2_2 \psi_b(\vec{r}_2)) \right)
+        \\
+        + \int d^3 r_1 d^3 r_2 \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right) V \left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right)
+    \end{align*}
+
+    Consideriamo solo la parentesi con il laplaciani
+
+    \begin{align*}
+        -\frac{\hbar^2}{2m}(\psi_b(\vec{r}_2) \nabla^2_1 \psi_a(\vec{r}_1) + \psi_a(\vec{r}_2) \nabla^2_1 \psi_b(\vec{r}_1)
+         +\psi_b(\vec{r}_1) \nabla^2_2 \psi_a(\vec{r}_2) + \psi_a(\vec{r}_1) \nabla^2_2 \psi_b(\vec{r}_2)) =
+         \\
+         = -\frac{\hbar^2}{2m} \left( \psi_b(\vec{r}_2) \psi_a(\vec{r}_1) \left(\frac{1}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_a\right|}\right)
+         + \psi_a(\vec{r}_2) \psi_b(\vec{r}_1) \left(\frac{1}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_b\right|}\right) \right.
+         \\
+         +\left. \psi_b(\vec{r}_1) \psi_a(\vec{r}_2) \left(\frac{1}{a^2} - \frac{2}{a\left|\vec{r}_2 - \vec{r}_a\right|}\right)
+         + \psi_a(\vec{r}_1) \psi_b(\vec{r}_2) \left(\frac{1}{a^2} - \frac{2}{a\left|\vec{r}_2 - \vec{r}_b\right|}\right)\right) =
+         \\
+         = -\frac{\hbar^2}{2m} \left( \psi_a(\vec{r}_1) \psi_b(\vec{r}_2) \left(\frac{2}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_a\right|} - \frac{2}{a\left|\vec{r}_2  - \vec{r}_b\right|}\right)
+         + \psi_b(\vec{r}_1) \psi_a(\vec{r}_2) \left(\frac{2}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_b\right|} - \frac{2}{a\left|\vec{r}_2 - \vec{r}_a\right|}\right)\right) =
+    \end{align*}
+
+    Moltiplicando per $\left(\psi_a(\vec{r}_1)\psi_b(\vec{r}_2) + \psi_b(\vec{r}_1)\psi_a(\vec{r}_2)\right)$ si trova
+
+    \begin{align*}
+        = -\frac{\hbar^2}{2m} \left( \psi_a(\vec{r}_1)^2 \psi_b(\vec{r}_2)^2 \left(\frac{2}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_a\right|} - \frac{2}{a\left|\vec{r}_2  - \vec{r}_b\right|}\right)
+        + \psi_b(\vec{r}_1)^2 \psi_a(\vec{r}_2)^2 \left(\frac{2}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_b\right|} - \frac{2}{a\left|\vec{r}_2 - \vec{r}_a\right|}\right) \right.
+        \\
+        + \left. \psi_a(\vec{r}_1) \psi_b(\vec{r}_1) \psi_a(\vec{r}_2) \psi_b(\vec{r}_2) \left(
+        \frac{4}{a^2} - \frac{2}{a\left|\vec{r}_1  - \vec{r}_a\right|} - \frac{2}{a\left|\vec{r}_2  - \vec{r}_b\right|}  - \frac{2}{a\left|\vec{r}_1  - \vec{r}_b\right|} - \frac{2}{a\left|\vec{r}_2 - \vec{r}_a\right|}
+        \right)
+        \right)
+        \\
+    \end{align*}
+
+\end{homeworkProblem}
+\end{document}
